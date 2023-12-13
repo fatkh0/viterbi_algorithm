@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Form } from "./components/Form";
+import { Layout } from "./components/Layout";
+import { LayoutProvider } from "./components/Layout/components/LayoutProvider";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools"; // Optional, for debugging
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <LayoutProvider>
+        <div className="App">
+          <Layout>
+            <Form />
+          </Layout>
+        </div>
+      </LayoutProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 
